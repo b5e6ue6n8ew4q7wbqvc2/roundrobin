@@ -418,7 +418,21 @@ def main():
             cols = st.columns(min(4, len(week_data)))
             for idx, (_, group_info) in enumerate(week_data.iterrows()):
                 with cols[idx % len(cols)]:
-                    st.info(f"**Group {group_info['Group']}** ({group_info['Size']} students)\n{group_info['Students']}")
+                    # Format students one per line
+                    students_list = group_info['Students'].split(', ')
+                    students_formatted = '\n'.join([f"• {student}" for student in students_list])
+                    
+                    # Use colored header and clean student list
+                    st.markdown(f"""
+                    <div style="background-color: #f0f2f6; padding: 15px; border-radius: 8px; border-left: 4px solid #1f77b4;">
+                        <h4 style="color: #1f77b4; margin-top: 0; margin-bottom: 10px;">
+                            🏫 Group {group_info['Group']} ({group_info['Size']} students)
+                        </h4>
+                        <div style="line-height: 1.8; color: #333;">
+                            {students_formatted.replace(chr(10), '<br>')}
+                        </div>
+                    </div>
+                    """, unsafe_allow_html=True)
             
             st.subheader("All Group Details")
             st.dataframe(details_df, use_container_width=True)
