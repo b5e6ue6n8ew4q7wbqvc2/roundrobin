@@ -418,13 +418,15 @@ def main():
             cols = st.columns(min(4, len(week_data)))
             for idx, (_, group_info) in enumerate(week_data.iterrows()):
                 with cols[idx % len(cols)]:
-                    # Format students one per line
+                    # Create the group content with proper line breaks
                     students_list = group_info['Students'].split(', ')
-                    students_formatted = '\n'.join([f"• {student}" for student in students_list])
                     
-                    st.info(f"""**:blue[Group {group_info['Group']} ({group_info['Size']} students)]**
-
-{students_formatted}""")
+                    # Build the content string with actual line breaks
+                    content = f"**:blue[Group {group_info['Group']} ({group_info['Size']} students)]**\n\n"
+                    for student in students_list:
+                        content += f"• {student}\n"
+                    
+                    st.info(content)
             
             st.subheader("All Group Details")
             st.dataframe(details_df, use_container_width=True)
