@@ -424,11 +424,11 @@ def main():
                     # Build student list with line breaks
                     students_formatted = '<br>'.join([f"• {student}" for student in students_list])
                     
-                    # Use correct st.info() color (#0066cc) with line breaks working
+                    # Use exact st.info() colors
                     st.markdown(f"""
-                    <div style="background-color: #0066cc; border: 1px solid #0066cc; border-radius: 0.375rem; padding: 1rem; margin-bottom: 1rem;">
-                        <strong style="color: white;">Group {group_info['Group']} ({group_info['Size']} students)</strong><br><br>
-                        <div style="color: white;">
+                    <div style="background-color: #172D43; border: 1px solid #172D43; border-radius: 0.375rem; padding: 1rem; margin-bottom: 1rem;">
+                        <strong style="color: #427DB2;">Group {group_info['Group']} ({group_info['Size']} students)</strong><br><br>
+                        <div style="color: #ADCFE3;">
                             {students_formatted}
                         </div>
                     </div>
