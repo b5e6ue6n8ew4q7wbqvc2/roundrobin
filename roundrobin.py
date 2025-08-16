@@ -421,12 +421,16 @@ def main():
                     # Create the group content with proper line breaks
                     students_list = group_info['Students'].split(', ')
                     
-                    # Build the content string with actual line breaks
-                    content = f"**:blue[Group {group_info['Group']} ({group_info['Size']} students)]**\n\n"
-                    for student in students_list:
-                        content += f"• {student}\n"
+                    # Build student list with line breaks
+                    students_formatted = '<br>'.join([f"• {student}" for student in students_list])
                     
-                    st.info(content)
+                    # Use markdown with custom CSS to replicate info box style
+                    st.markdown(f"""
+                    <div style="background-color: #d1ecf1; border: 1px solid #bee5eb; border-radius: 0.375rem; padding: 1rem; margin-bottom: 1rem; color: #0c5460;">
+                        <strong style="color: #0c5460;">Group {group_info['Group']} ({group_info['Size']} students)</strong><br><br>
+                        {students_formatted}
+                    </div>
+                    """, unsafe_allow_html=True)
             
             st.subheader("All Group Details")
             st.dataframe(details_df, use_container_width=True)
